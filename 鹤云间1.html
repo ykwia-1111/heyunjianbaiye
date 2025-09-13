@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>燕云十六声 - 鹤云间</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- 定制“鹤云间”色系：流云白+青霭蓝+黛墨灰 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        crane: {
+                            light: '#D1E9E9', // 流云白（雾、云底）
+                            mid: '#71A8C2', // 青霭蓝（云间、鹤羽）
+                            dark: '#2D3748', // 黛墨灰（远山、文字）
+                            accent: '#A7C9D9', // 轻雾蓝（边框、高亮）
+                        }
+                    },
+                    fontFamily: {
+                        cloud: ['"Ma Shan Zheng"', '"Noto Serif SC"', 'serif'], // 云鹤风字体
+                        light: ['"Noto Sans SC"', 'sans-serif'], // 轻量正文
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- 引入古风字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@300;400&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-cloud {
+                text-shadow: 0 0 12px rgba(113, 168, 194, 0.4);
+            }
+            .bg-cloud {
+                background-color: rgba(248, 250, 252, 0.85);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+            }
+            .bg-cloud-dark {
+                background-color: rgba(45, 55, 72, 0.7);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+            }
+            .card-hover {
+                transition: all 0.5s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-crane-light to-crane-light/90 min-h-screen font-light text-crane-dark/90">
+    <!-- 导航栏（流云雾感） -->
+    <nav class="bg-cloud shadow-lg sticky top-0 z-50 transition-all duration-500">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fa fa-paper-plane-o text-crane-mid text-3xl mr-3 text-cloud"></i>
+                <h1 class="font-cloud text-2xl md:text-3xl text-crane-mid text-cloud">鹤云间</h1>
+            </div>
+            
+            <!-- 导航链接 - 仅保留核心功能 -->
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="#members" class="text-crane-dark/80 hover:text-crane-mid transition-colors duration-300">同云者</a>
+                <a href="#recruit" class="text-crane-dark/80 hover:text-crane-mid transition-colors duration-300">加入我们</a>
+                <button class="bg-crane-mid/20 border border-crane-mid text-crane-mid hover:bg-crane-mid/30 transition-colors duration-300 font-medium px-4 py-1.5 rounded-full text-sm">
+                    入云同行
+                </button>
+            </div>
+            
+            <!-- 移动端菜单按钮 -->
+            <button class="md:hidden text-crane-dark text-2xl" id="menuBtn">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div id="mobileMenu" class="hidden md:hidden bg-cloud">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+                <a href="#members" class="text-crane-dark/80 hover:text-crane-mid transition-colors duration-300 py-2 border-b border-crane-dark/10">同云者</a>
+                <a href="#recruit" class="text-crane-dark/80 hover:text-crane-mid transition-colors duration-300 py-2">加入我们</a>
+                <button class="bg-crane-mid/20 border border-crane-mid text-crane-mid hover:bg-crane-mid/30 transition-colors duration-300 font-medium px-4 py-2 rounded-full">
+                    入云同行
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域（云鹤远山+缥缈标题） -->
+    <section class="relative h-[80vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://picsum.photos/id/1036/1920/1080" alt="燕云云鹤场景" class="w-full h-full object-cover opacity-65">
+            <div class="absolute inset-0 bg-gradient-to-b from-crane-dark/20 to-crane-mid/10"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 z-10 text-center">
+            <h1 class="font-cloud text-[clamp(3.5rem,10vw,6rem)] text-crane-light mb-6 text-cloud">
+                鹤云间
+            </h1>
+            <p class="text-[clamp(1rem,2vw,1.6rem)] text-crane-light/90 max-w-2xl mx-auto mb-10 leading-relaxed">
+                燕云之上有闲云，云间栖鹤待同游<br>
+                不追江湖名，但寻同趣人
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-5">
+                <a href="#members" class="bg-crane-mid/30 border border-crane-accent text-crane-light hover:bg-crane-mid/50 transition-all duration-500 transform hover:scale-105 rounded-full px-8 py-3">
+                    见同云者 <i class="fa fa-users ml-2"></i>
+                </a>
+                <a href="#recruit" class="bg-transparent border-2 border-crane-accent text-crane-accent hover:bg-crane-accent/10 transition-all duration-500 transform hover:scale-105 rounded-full px-8 py-3">
+                    加入我们 <i class="fa fa-sign-in ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 成员展示区（核心功能） -->
+    <section id="members" class="py-20 bg-crane-light/50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="font-cloud text-[clamp(1.8rem,4vw,3rem)] text-crane-mid mb-4">同云者</h2>
+                <div class="w-24 h-0.5 bg-crane-accent mx-auto mb-6"></div>
+                <p class="max-w-3xl mx-auto text-crane-dark/70 text-lg">
+                    云间之人，各有喜好<br>
+                    或爱独行探云，或喜组队闲聊<br>
+                    但求一份自在，便聚在这鹤云间
+                </p>
+            </div>
+            
+            <!-- 成员筛选 -->
+            <div class="flex flex-wrap justify-center gap-3 mb-14">
+                <button class="bg-crane-mid/20 text-crane-mid px-6 py-2 rounded-full text-sm">皆可</button>
+                <button class="bg-crane-dark/5 text-crane-dark/70 px-6 py-2 rounded-full text-sm hover:bg-crane-mid/20 hover:text-crane-mid transition-colors">探云者</button>
+                <button class="bg-crane-dark/5 text-crane-dark/70 px-6 py-2 rounded-full text-sm hover:bg-crane-mid/20 hover:text-crane-mid transition-colors">巧匠人</button>
+                <button class="bg-crane-dark/5 text-crane-dark/70 px-6 py-2 rounded-full text-sm hover:bg-crane-mid/20 hover:text-crane-mid transition-colors">萌新友</button>
+                <button class="bg-crane-dark/5 text-crane-dark/70 px-6 py-2 rounded-full text-sm hover:bg-crane-mid/20 hover:text-crane-mid transition-colors">闲云者</button>
+            </div>
+            
+            <!-- 成员网格 -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                <!-- 成员1 -->
+                <div class="bg-crane-light rounded-xl overflow-hidden shadow-md card-hover">
+                    <div class="relative h-64">
+                        <img src="https://github.com/ykwia-1111/heyunjian/blob/main/%E7%87%95%E4%BA%91%E5%8D%81%E5%85%AD%E5%A3%B0%202025_9_13%2018_13_12.png?raw=true" alt="云岫的游戏造型" class="w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 bg-crane-mid/80 text-crane-light px-3 py-1 rounded-full text-xs">
+                            阁主
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="mb-4 text-center">
+                            <h3 class="font-cloud text-xl text-crane-mid">苍穹无极</h3>
+                            <p class="text-crane-dark/60 text-xs mt-1">爱寻云间秘境 · 阁主</p>
+                            <div class="w-16 h-0.5 bg-crane-accent/50 mx-auto mt-2"></div>
+                        </div>
+                        <p class="text-crane-dark/70 text-sm mb-5 leading-relaxed text-center">
+                            燕云的云哪块好看，哪座山能看日出，我都门儿清，随时能带你去。
+                        </p>
+                        <div class="flex justify-center space-x-2">
+                            <span class="bg-crane-mid/10 text-crane-mid text-xs px-2 py-1 rounded">探路</span>
+                            <span class="bg-crane-mid/10 text-crane-mid text-xs px-2 py-1 rounded">风景</span>
+                            <span class="bg-crane-mid/10 text-crane-mid text-xs px-2 py-1 rounded">解谜</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 成员2 -->
+                <div class="bg-crane-light rounded-xl overflow-hidden shadow-md card-hover">
+                    <div class="relative h-64">
+                        <img src="https://picsum.photos/id/1062/600/400" alt="鹤影的游戏造型" class="w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 bg-crane-dark/70 text-crane-light px-3 py-1 rounded-full text-xs">
+                            巧匠
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="mb-4 text-center">
+                            <h3 class="font-cloud text-xl text-crane-mid">鹤影</h3>
+                            <p class="text-crane-dark/60 text-xs mt-1">擅长锻造 · 生活玩家</p>
+                            <div class="w-16 h-0.5 bg-crane-accent/50 mx-auto mt-2"></div>
+                        </div>
+                        <p class="text-crane-dark/70 text-sm mb-5 leading-relaxed text-center">
+                            喜欢琢磨装备锻造，你们打出来的材料别扔，我能给你们做不少好东西。
+                        </p>
+                        <div class="flex justify-center space-x-2">
+                            <span class="bg-crane-mid/10 text-crane-mid text-xs px-2 py-1 rounded">锻造</span>
+                            <span class="bg-crane-mid/10 text-crane-mid text-xs px-2 py-1 rounded">烹饪</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 成员3 -->
+                <div class="bg-crane-light rounded-xl overflow-hidden shadow-md card-hover">
+                    <div class="relative h-64">
+                        <img src="https://picsum.photos/id/1074/600/400" alt="风絮的游戏造型" class="w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 bg-crane-dark/70 text-crane-light px-3 py-1 rounded-full text-xs">
+                            萌新友
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="mb-4 text-center">
+                            <h3 class="font-cloud text-xl text-crane-mid">风絮</h3>
+                            <p class="text-crane-dark/60 text-xs mt-1">爱带萌新 · 副本向导</p>
+                            <div class="w-16 h-0.5 bg-crane-accent/50 mx-auto mt-2"></div>
+                        </div>
+                        <p class="text-crane-dark/70 text-sm mb-5 leading-relaxed text-center">
+                            新手上路别担心，我带过好多萌新了，副本机制我都熟，耐心教你。
+                        </p>
+                        <div class="flex justify-center space-x-2">
+                            <span class="bg-crane-mid/10 text-crane-mid text-xs px-2 py-1 rounded">带新</span>
+                            <span class="bg-crane-mid/10 text-crane-mid text-xs px-2 py-1 rounded">副本</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 成员4 -->
+                <div class="bg-crane-light rounded-xl overflow-hidden shadow-md card-hover">
+                    <div class="relative h-64">
+                        <img src="https://picsum.photos/id/1005/600/400" alt="墨山的游戏造型" class="w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 bg-crane-dark/70 text-crane-light px-3 py-1 rounded-full text-xs">
+                            闲云者
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="mb-4 text-center">
+                            <h3 class="font-cloud text-xl text-crane-mid">墨山</h3>
+                            <p class="text-crane-dark/60 text-xs mt-1">爱钓鱼喝茶 · 养老玩家</p>
+                            <div class="w-16 h-0.5 bg-crane-accent/50 mx-auto mt-2"></div>
+                        </div>
+                        <p class="text-crane-dark/70 text-sm mb-5 leading-relaxed text-center">
+                            不爱打打杀杀，就喜欢找个湖边钓鱼，偶尔看看风景，有同款玩家吗？
+                        </p>
+                        <div class="flex justify-center space-x-2">
+                            <span class="bg-crane-mid/10 text-crane-mid text-xs px-2 py-1 rounded">钓鱼</span>
+                            <span class="bg-crane-mid/10 text-crane-mid text-xs px-2 py-1 rounded">休闲</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 成员5 -->
+                <div class="bg-crane-light rounded-xl overflow-hidden shadow-md card-hover">
+                    <div class="relative h-64">
+                        <img src="https://picsum.photos/id/1011/600/400" alt="清弦的游戏造型" class="w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 bg-crane-dark/70 text-crane-light px-3 py-1 rounded-full text-xs">
+                            探云者
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="mb-4 text-center">
+                            <h3 class="font-cloud text-xl text-crane-mid">清弦</h3>
+                            <p class="text-crane-dark/60 text-xs mt-1">爱找隐藏剧情 · 剧情党</p>
+                            <div class="w-16 h-0.5 bg-crane-accent/50 mx-auto mt-2"></div>
+                        </div>
+                        <p class="text-crane-dark/70 text-sm mb-5 leading-relaxed text-center">
+                            收集了燕云好多隐藏剧情和对话，知道哪些NPC有特殊故事，欢迎交流。
+                        </p>
+                        <div class="flex justify-center space-x-2">
+                            <span class="bg-crane-mid/10 text-crane-mid text-xs px-2 py-1 rounded">剧情</span>
+                            <span class="bg-crane-mid/10 text-crane-mid text-xs px-2 py-1 rounded">收集</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 成员6 -->
+                <div class="bg-crane-light rounded-xl overflow-hidden shadow-md card-hover">
+                    <div class="relative h-64">
+                        <img src="https://picsum.photos/id/1027/600/400" alt="云瑶的游戏造型" class="w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 bg-crane-dark/70 text-crane-light px-3 py-1 rounded-full text-xs">
+                            巧匠人
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="mb-4 text-center">
+                            <h3 class="font-cloud text-xl text-crane-mid">云瑶</h3>
+                            <p class="text-crane-dark/60 text-xs mt-1">擅长制药 · 外观党</p>
+                            <div class="w-16 h-0.5 bg-crane-accent/50 mx-auto mt-2"></div>
+                        </div>
+                        <p class="text-crane-dark/70 text-sm mb-5 leading-relaxed text-center">
+                            喜欢研究各种药草配方，也收集了很多好看的外观，有需要可以找我。
+                        </p>
+                        <div class="flex justify-center space-x-2">
+                            <span class="bg-crane-mid/10 text-crane-mid text-xs px-2 py-1 rounded">制药</span>
+                            <span class="bg-crane-mid/10 text-crane-mid text-xs px-2 py-1 rounded">外观</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 查看更多按钮 -->
+            <div class="text-center mt-12">
+                <button class="border-2 border-crane-mid text-crane-mid hover:bg-crane-mid hover:text-crane-light transition-colors duration-300 px-6 py-2 rounded-full font-medium">
+                    查看更多同云者 <i class="fa fa-angle-right ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 加入我们区域（核心功能） -->
+    <section id="recruit" class="py-20 bg-gradient-to-b from-crane-light/50 to-crane-light">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto bg-cloud rounded-xl shadow-xl overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-1/2 relative">
+                        <img src="https://picsum.photos/id/28/800/1200" alt="燕云风景" class="h-full w-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-r from-crane-dark/40 to-transparent md:block hidden"></div>
+                    </div>
+                    <div class="md:w-1/2 p-8 md:p-12">
+                        <h2 class="font-cloud text-[clamp(1.5rem,3vw,2.5rem)] text-crane-mid mb-6">加入鹤云间</h2>
+                        <p class="text-crane-dark/70 mb-8">
+                            无论你是初入燕云的萌新，还是资深江湖客，
+                            只要想找个自在的地方，和有趣的人一起玩，
+                            鹤云间就欢迎你的加入
+                        </p>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-start">
+                                <i class="fa fa-check-circle text-crane-mid mt-1 mr-3"></i>
+                                <p class="text-crane-dark/70">不用每天打卡，上线自在随心</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fa fa-check-circle text-crane-mid mt-1 mr-3"></i>
+                                <p class="text-crane-dark/70">拒绝内卷，不强迫做任何事</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fa fa-check-circle text-crane-mid mt-1 mr-3"></i>
+                                <p class="text-crane-dark/70">有问必答，萌新也能快速融入</p>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fa fa-check-circle text-crane-mid mt-1 mr-3"></i>
+                                <p class="text-crane-dark/70">定期组织趣味活动，共享游戏乐趣</p>
+                            </div>
+                        </div>
+                        
+                        <form class="space-y-4">
+                            <div>
+                                <label for="gameId" class="block text-sm font-medium text-crane-dark/80 mb-1">游戏ID</label>
+                                <input type="text" id="gameId" class="w-full px-4 py-2 border border-crane-accent/50 rounded focus:ring-2 focus:ring-crane-mid focus:border-crane-mid transition-colors" placeholder="请输入你的游戏ID">
+                            </div>
+                            <div>
+                                <label for="role" class="block text-sm font-medium text-crane-dark/80 mb-1">职业/专长</label>
+                                <input type="text" id="role" class="w-full px-4 py-2 border border-crane-accent/50 rounded focus:ring-2 focus:ring-crane-mid focus:border-crane-mid transition-colors" placeholder="你的职业或擅长领域">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-crane-dark/80 mb-1">想对我们说</label>
+                                <textarea id="message" rows="3" class="w-full px-4 py-2 border border-crane-accent/50 rounded focus:ring-2 focus:ring-crane-mid focus:border-crane-mid transition-colors" placeholder="为什么想加入鹤云间？"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-crane-mid hover:bg-crane-mid/90 text-crane-light font-medium py-3 px-6 rounded transition-colors duration-300 transform hover:scale-[1.02]">
+                                提交申请
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-crane-dark/80 text-crane-light/80 py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center">
+                        <i class="fa fa-paper-plane-o text-crane-accent text-2xl mr-2"></i>
+                        <h2 class="font-cloud text-xl text-crane-accent">鹤云间</h2>
+                    </div>
+                    <p class="text-sm mt-2">燕云十六声 · 自在同行</p>
+                </div>
+                
+                <div class="flex space-x-6 mb-6 md:mb-0">
+                    <a href="#" class="text-crane-light/60 hover:text-crane-accent transition-colors">
+                        <i class="fa fa-weixin text-xl"></i>
+                    </a>
+                    <a href="#" class="text-crane-light/60 hover:text-crane-accent transition-colors">
+                        <i class="fa fa-qq text-xl"></i>
+                    </a>
+                    <a href="#" class="text-crane-light/60 hover:text-crane-accent transition-colors">
+                        <i class="fa fa-gamepad text-xl"></i>
+                    </a>
+                </div>
+                
+                <div class="text-sm text-center md:text-right">
+                    <p>© 2023 鹤云间 版权所有</p>
+                    <p class="mt-1">燕云十六声 · 百业宣传</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = menuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // 关闭移动端菜单
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    const icon = menuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // 成员筛选按钮效果
+        const filterButtons = document.querySelectorAll('.flex-wrap button');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // 移除所有按钮的active状态
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('bg-crane-mid/20', 'text-crane-mid');
+                    btn.classList.add('bg-crane-dark/5', 'text-crane-dark/70', 'hover:bg-crane-mid/20', 'hover:text-crane-mid');
+                });
+                
+                // 设置当前按钮为active状态
+                button.classList.remove('bg-crane-dark/5', 'text-crane-dark/70', 'hover:bg-crane-mid/20', 'hover:text-crane-mid');
+                button.classList.add('bg-crane-mid/20', 'text-crane-mid');
+            });
+        });
+    </script>
+</body>
+</html>
+    
